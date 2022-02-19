@@ -55,6 +55,7 @@ class LoginFragment : Fragment() , View.OnClickListener {
     override fun onClick(v: View) {
 
         _binding?.loginLoader?.isVisible = true
+        _binding?.loginLoader?.bringToFront()
 
         vm.onLogin(email=_binding?.emailAddress.toString(),password = _binding?.password.toString())
 
