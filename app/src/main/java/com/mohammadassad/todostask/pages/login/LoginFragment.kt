@@ -5,13 +5,16 @@ import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.marsad.stylishdialogs.StylishAlertDialog
 import com.mohammadassad.todostask.R
+import com.mohammadassad.todostask.alert.Alert
 import com.mohammadassad.todostask.databinding.FragmentLoginBinding
 import com.mohammadassad.todostask.routes.Screens
 import com.mohammadassad.todostask.routes.navRoutes
@@ -34,8 +37,6 @@ class LoginFragment : Fragment() , View.OnClickListener {
 
         //hide status bar
         (activity as AppCompatActivity).supportActionBar?.hide()
-
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         _binding?.loginButton?.setOnClickListener(this)
         return binding.root
@@ -65,6 +66,12 @@ class LoginFragment : Fragment() , View.OnClickListener {
                     navRoutes(findNavController(),Screens.LoginPageToHomePage.route)
                 }
                 else->{
+                    Alert.showAlert(
+                        title = "Something went wrong",
+                        message="Email or Password are incorrect",
+                        alertType = StylishAlertDialog.ERROR,
+                        context= activity
+                    )
                     _binding?.loginLoader?.isVisible = false
                 }
             }
