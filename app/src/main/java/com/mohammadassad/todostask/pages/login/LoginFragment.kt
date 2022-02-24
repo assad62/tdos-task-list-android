@@ -24,7 +24,6 @@ import kotlinx.coroutines.coroutineScope
 class LoginFragment : Fragment() , View.OnClickListener {
 
     var vm:LoginViewModel = LoginViewModel()
-
     private var _binding: FragmentLoginBinding? = null
     private val binding: FragmentLoginBinding get() = _binding!!
 
@@ -57,7 +56,7 @@ class LoginFragment : Fragment() , View.OnClickListener {
         _binding?.loginLoader?.isVisible = true
         _binding?.loginLoader?.bringToFront()
 
-        vm.onLogin(email=_binding?.emailAddress.toString(),password = _binding?.password.toString())
+        vm.onLogin(email= _binding?.emailAddress?.text.toString(),password = _binding?.password?.text.toString())
 
         vm.isLoginSuccess.observe(viewLifecycleOwner, Observer{
 

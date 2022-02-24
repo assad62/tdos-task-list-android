@@ -1,9 +1,11 @@
 package com.mohammadassad.todostask.pages.login
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mohammadassad.todostask.pages.login.service.LoginServiceImpl
+import com.mohammadassad.todostask.storage.LocalStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,7 +28,9 @@ class LoginViewModel: ViewModel() {
             if(res.isSuccessful && res.body() != null){
                 val loginResponse = res.body()!!.body
                 withContext(Dispatchers.Main){
-                   // token.value = loginResponse.token.toString()
+                    loginResponse.token?.let {
+                        LocalStorage.setStringValue("auth_token", it)
+                    }
                     isLoginSuccess.value = true
                 }
 
@@ -40,9 +44,6 @@ class LoginViewModel: ViewModel() {
             }
         }
 
-//        token.observeForever( Observer {
-//             Log.d("9910",it)
-//        })
 
 
     }
