@@ -1,6 +1,5 @@
 package com.mohammadassad.todostask.pages.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,6 +26,7 @@ class LoginViewModel: ViewModel() {
             val res = LoginServiceImpl().login(email, password)
             if(res.isSuccessful && res.body() != null){
                 val loginResponse = res.body()!!.body
+
                 withContext(Dispatchers.Main){
                     loginResponse.token?.let {
                         LocalStorage.setStringValue("auth_token", it)

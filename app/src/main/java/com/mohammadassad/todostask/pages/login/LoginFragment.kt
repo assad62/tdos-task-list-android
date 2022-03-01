@@ -1,12 +1,19 @@
 package com.mohammadassad.todostask.pages.login
 
 import android.content.Context
+import android.graphics.Color
 import android.opengl.Visibility
 import android.os.Build
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
 
 import android.view.*
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -38,6 +45,12 @@ class LoginFragment : Fragment() , View.OnClickListener {
         (activity as AppCompatActivity).supportActionBar?.hide()
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         _binding?.loginButton?.setOnClickListener(this)
+
+        makeTextLink(_binding?.signup, "Signup now", false, Color.CYAN,
+            action = {
+                navRoutes(findNavController(),Screens.LoginPageToSignInPage.route)
+            }
+        )
         return binding.root
 
     }
@@ -81,5 +94,27 @@ class LoginFragment : Fragment() , View.OnClickListener {
 
     }
 
+    //make signup link clickable
+    private fun makeTextLink(textView: TextView?, str: String, underlined: Boolean, color: Int?, action: (() -> Unit)? = null) {
+        val spannableString = SpannableString(textView?.text)
+        val textColor = color ?: textView?.currentTextColor
+        val clickableSpan = object : ClickableSpan() {
+            override fun onClick(textView: View) {
+                action?.invoke()
+            }
+            override fun updateDrawState(drawState: TextPaint) {
+                super.updateDrawState(drawState)
+                drawState.isUnderlineText = underlined
+                if (textColor != null) {
+                    drawState.color = textColor
+                }
+            }
+        }
+        val index = spannableString.indexOf(str)
+        spannableString.setSpan(clickableSpan, index, index + str.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        textView?.text = spannableString
+        textView?.movementMethod = LinkMovementMethod.getInstance()
+        textView?.highlightColor = Color.TRANSPARENT
+    }
 
 }

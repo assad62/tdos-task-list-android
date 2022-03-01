@@ -6,7 +6,7 @@
         <entry key="app/src/main/res/drawable/edit_text_border.xml" value="0.121" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.19610507246376813" />
       </map>
     </option>
