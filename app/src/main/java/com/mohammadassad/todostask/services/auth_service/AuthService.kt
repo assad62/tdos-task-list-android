@@ -1,4 +1,4 @@
-package com.mohammadassad.todostask.api
+package com.mohammadassad.todostask.services.auth_service
 
 import com.mohammadassad.todostask.models.Login.LoginRequest
 import com.mohammadassad.todostask.models.Login.LoginResponse
