@@ -1,7 +1,4 @@
 package com.mohammadassad.todostask
-
-
-
 import android.app.Activity
 import android.app.Application
 import android.content.Context
